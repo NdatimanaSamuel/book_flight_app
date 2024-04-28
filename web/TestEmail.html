@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Email</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div>TODO write content</div>
+    <button id="sendEmailButton">Send Email</button>
+
+    <script>
+        document.getElementById('sendEmailButton').addEventListener('click', async () => {
+            const customerNames = 'Patient Name';
+            const customerEmail = 'ndatimanasamuel2@gmail.com';
+            const customerCode = 'password123';
+
+            try {
+                const response = await fetch('http://localhost/TelexTravelTours/send_email.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: `customerNames=${encodeURIComponent(customerNames)}&customerEmail=${encodeURIComponent(customerEmail)}&customerCode=${encodeURIComponent(customerCode)}`
+                });
+
+                if (response.ok) {
+                    console.log('Email sent successfully');
+                } else {
+                    console.error('Failed to send email');
+                }
+            } catch (error) {
+                console.error('Error sending email:', error);
+            }
+        });
+    </script>
+</body>
+</html>
